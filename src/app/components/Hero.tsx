@@ -54,13 +54,13 @@ export default function Hero() {
             {/* Mail + LinkedIn (droite haut) */}
             <div className="absolute top-8 right-8 flex gap-6 text-xs font-mono uppercase tracking-widest text-[var(--color-text-light)] z-10">
                 <a
-                href="mailto:ton@email.com"
+                href="mailto:gaelleboucher.dev@gmail.com"
                 className="hover:text-[var(--color-taxi)] transition"
                 >
                 Mail
                 </a>
                 <a
-                href="https://www.linkedin.com/in/tonprofil/"
+                href="https://www.linkedin.com/in/gaelle-boucher/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[var(--color-taxi)] transition"
