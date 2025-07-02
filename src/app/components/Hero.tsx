@@ -14,7 +14,7 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--color-taxi)_0%,transparent_70%)] opacity-10" />
 
         {/* Gaëlle (haut gauche) */}
-        <div className="absolute top-10 left-8 z-10 font-bold text-[6vw] leading-none tracking-tight uppercase font-sans flex">
+        <div className="absolute top-10 left-8 z-10 font-bold text-[6vw] leading-none tracking-tight uppercase font-sans flex" data-cursor="dark">
             {'Gaëlle'.split('').map((letter, i) => (
             <motion.span
                 key={`g-${i}`}
@@ -33,7 +33,7 @@ export default function Hero() {
         </div>
 
         {/* Boucher (bas droite) */}
-        <div className="absolute bottom-10 right-8 z-10 font-bold text-[6vw] leading-none tracking-tight uppercase font-sans flex">
+        <div className="absolute bottom-10 right-8 z-10 font-bold text-[6vw] leading-none tracking-tight uppercase font-sans flex" data-cursor="dark">
             {'Boucher'.split('').map((letter, i) => (
             <motion.span
                 key={`b-${i}`}
@@ -86,7 +86,7 @@ export default function Hero() {
 
         {/* Titre central */}
         <div className="flex h-full w-full flex-col items-center justify-center text-center px-6">
-            <h1 className="flex flex-wrap justify-center gap-x-2 gap-y-3 text-5xl md:text-7xl font-serif tracking-tight leading-tight z-10">
+            <h1 className="flex flex-wrap justify-center gap-x-2 gap-y-3 text-5xl md:text-7xl font-serif tracking-tight leading-tight z-10" data-cursor="dark">
             {titleWords.map((word, i) => (
                 <motion.span
                 key={word + i}
