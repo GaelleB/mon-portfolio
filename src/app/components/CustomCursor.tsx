@@ -1,56 +1,56 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
-export default function CustomCursor() {
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [variant, setVariant] = useState<'default' | 'dark' | 'blue'>('default');
+const CustomCursor = () => {
+    const [isHovering, setIsHovering] = useState(false);
+
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const smoothMouseX = useSpring(mouseX, { stiffness: 800, damping: 40 });
+    const smoothMouseY = useSpring(mouseY, { stiffness: 800, damping: 40 });
 
     useEffect(() => {
-        const moveCursor = (e: MouseEvent) => {
-        setPosition({ x: e.clientX, y: e.clientY });
-
-        const element = document.elementFromPoint(e.clientX, e.clientY);
-        const cursorType = element?.closest('[data-cursor]')?.getAttribute('data-cursor');
-
-        switch (cursorType) {
-            case 'dark':
-            setVariant('dark');
-            break;
-            case 'blue':
-            setVariant('blue');
-            break;
-            default:
-            setVariant('default');
-            break;
-        }
+        const handleMouseMove = (e: MouseEvent) => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
         };
 
-        document.addEventListener('mousemove', moveCursor);
-        return () => document.removeEventListener('mousemove', moveCursor);
-    }, []);
+        const handleMouseEnter = () => setIsHovering(true);
+        const handleMouseLeave = () => setIsHovering(false);
 
-    const getColor = () => {
-        switch (variant) {
-        case 'dark':
-            return 'bg-black';
-        case 'blue':
-            return 'bg-blue-400';
-        default:
-            return 'bg-[var(--color-taxi-hover)]';
-        }
-    };
+        window.addEventListener('mousemove', handleMouseMove);
+
+        const hoverables = document.querySelectorAll('a, button, [data-hover]');
+        hoverables.forEach(el => {
+        el.addEventListener('mouseenter', handleMouseEnter);
+        el.addEventListener('mouseleave', handleMouseLeave);
+        });
+
+        return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        hoverables.forEach(el => {
+            el.removeEventListener('mouseenter', handleMouseEnter);
+            el.removeEventListener('mouseleave', handleMouseLeave);
+        });
+        };
+    }, [mouseX, mouseY]);
 
     return (
-        <div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none transition-transform duration-150 ease-out"
+        <motion.div
+        className={`fixed pointer-events-none z-[9999] mix-blend-difference transition-all duration-200 ease-out ${
+            isHovering ? 'w-16 h-16' : 'w-8 h-8'
+        } bg-white rounded-full`}
         style={{
-            transform: `translate(${position.x - 20}px, ${position.y - 20}px)`,
+            x: smoothMouseX,
+            y: smoothMouseY,
+            translateX: isHovering ? -32 : -16,
+            translateY: isHovering ? -32 : -16,
         }}
-        >
-        <div
-            className={`w-10 h-10 rounded-full opacity-80 transition-colors duration-200 ${getColor()}`}
         />
-        </div>
     );
-}
+};
+
+export default CustomCursor;
