@@ -14,8 +14,8 @@ const CustomCursor = () => {
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-        mouseX.set(e.clientX);
-        mouseY.set(e.clientY);
+            mouseX.set(e.clientX);
+            mouseY.set(e.clientY);
         };
 
         const handleMouseEnter = () => setIsHovering(true);
@@ -32,8 +32,8 @@ const CustomCursor = () => {
         return () => {
         window.removeEventListener('mousemove', handleMouseMove);
         hoverables.forEach(el => {
-            el.removeEventListener('mouseenter', handleMouseEnter);
-            el.removeEventListener('mouseleave', handleMouseLeave);
+                el.removeEventListener('mouseenter', handleMouseEnter);
+                el.removeEventListener('mouseleave', handleMouseLeave);
         });
         };
     }, [mouseX, mouseY]);
