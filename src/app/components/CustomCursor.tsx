@@ -41,7 +41,7 @@ const CustomCursor = () => {
     return (
         <motion.div
         className={`fixed pointer-events-none z-[9999] mix-blend-difference transition-all duration-200 ease-out ${
-            isHovering ? 'w-16 h-16' : 'w-8 h-8'
+            isHovering ? 'w-16 h-16' : 'w-12 h-12'
         } bg-white rounded-full`}
         style={{
             x: smoothMouseX,
