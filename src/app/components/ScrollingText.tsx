@@ -7,7 +7,7 @@ const words = [
 ];
 
 export default function ScrollingText() {
-  const repeatedWords = [...words, ...words]; // doublé pour continuité fluide
+  const repeatedWords = [...words, ...words]; // doublé pour une continuité fluide
 
   return (
     <div className="absolute bottom-0 left-0 w-full overflow-hidden z-0 select-none">
